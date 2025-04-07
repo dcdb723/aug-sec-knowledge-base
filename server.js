@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 // 中间件
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname))); // 使用根目录作为静态文件目录
 
 // 安全知识库数据 (在实际应用中应该使用数据库)
 const knowledgeBase = [
@@ -71,6 +71,15 @@ const popularTopics = [
 
 // API路由
 
+// 获取初始化数据（包含默认知识项和热门话题）
+app.get('/api/init', (req, res) => {
+    const initData = {
+        defaultItem: knowledgeBase[0],
+        popularTopics: popularTopics
+    };
+    res.json(initData);
+});
+
 // 获取热门话题
 app.get('/api/topics', (req, res) => {
     res.json(popularTopics);
@@ -81,7 +90,17 @@ app.get('/api/topics/:topicName', (req, res) => {
     const topicName = req.params.topicName.toLowerCase();
     // 这里应该有一个按主题过滤的逻辑
     // 简化示例中我们随机返回1-2个条目
-    const filteredItems = knowledgeBase.filter((_, index) => index % 2 === 0);
+    const filteredItems = knowledgeBase.filter(item => 
+        item.category.toLowerCase().includes(topicName) || 
+        item.skillsRequired.toLowerCase().includes(topicName) || 
+        item.challenges.toLowerCase().includes(topicName)
+    );
+    
+    if (filteredItems.length === 0) {
+        // 如果没有找到相关结果，则至少返回一个默认条目
+        filteredItems.push(knowledgeBase[0]);
+    }
+    
     res.json(filteredItems);
 });
 
@@ -118,7 +137,7 @@ app.get('/api/knowledge/:id', (req, res) => {
 
 // 为前端应用提供HTML
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // 启动服务器

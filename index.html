@@ -25,10 +25,7 @@
             
             <div class="topics">
                 <span>Popular topics:</span>
-                <a href="#" class="topic">encryption</a>,
-                <a href="#" class="topic">SSL</a>,
-                <a href="#" class="topic">sql injection</a>
-                <span>...</span>
+                <!-- 话题将由服务端动态填充 -->
             </div>
         </header>
         
@@ -36,41 +33,39 @@
             <div class="knowledge-card">
                 <div class="card-item">
                     <span class="label">Category:</span>
-                    <span class="value">How - to</span>
+                    <span class="value">Loading...</span>
                 </div>
                 
                 <div class="card-item">
                     <span class="label">Challenges:</span>
-                    <span class="value">Risk of storing passwords in plain text or using weak hashing algorithms like MD5, vulnerability to rainbow table attacks, handling password resets securely</span>
+                    <span class="value">Loading...</span>
                 </div>
                 
                 <div class="card-item">
                     <span class="label">Skills Required:</span>
-                    <span class="value">bcrypt with password_hash(), avoid MD5, proper salt generation, secure comparison methods</span>
+                    <span class="value">Loading...</span>
                 </div>
                 
                 <div class="card-item">
                     <span class="label">LLM solution:</span>
-                    <span class="value">Use password_hash() to deal with password storage, set proper cost factor, leverage secure comparison with password_verify(), implement proper password policies</span>
+                    <span class="value">Loading...</span>
                 </div>
                 
                 <div class="card-item">
                     <span class="label">Similarity:</span>
-                    <span class="value">0.91 (Extremely similar)</span>
+                    <span class="value">Loading...</span>
                 </div>
                 
                 <div class="card-item">
                     <span class="label">Sentimental:</span>
-                    <span class="value">Easy to read, high level skilled required</span>
+                    <span class="value">Loading...</span>
                 </div>
             </div>
             
             <div class="related-posts">
                 <h2>Related Post on Stack Overflow</h2>
                 <div class="posts-container">
-                    <div class="post">Best practices for secure password storage in PHP</div>
-                    <div class="post">Why MD5 is not suitable for password hashing</div>
-                    <div class="post">How to implement a secure password reset flow</div>
+                    <!-- 相关文章将由服务端动态填充 -->
                     <div class="more-button" title="Show more related posts">
                         <i class="fas fa-ellipsis-h"></i>
                     </div>
@@ -82,10 +77,6 @@
             <p>© 2023 Augmented Security Knowledge Base</p>
         </footer>
     </div>
-    <!-- 开发模式使用 script.js -->
-    <script src="script.js"></script>
-    
-    <!-- 生产模式使用 client.js（与后端API交互） -->
-    <!-- <script src="client.js"></script> -->
+    <script src="client.js"></script>
 </body>
 </html> 
