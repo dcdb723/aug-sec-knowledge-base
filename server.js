@@ -5,8 +5,13 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 中间件
-app.use(cors());
+// CORS配置，允许从GitHub Pages访问API
+app.use(cors({
+    origin: ['http://localhost:3000', 'https://dcdb723.github.io'], // 允许本地开发和GitHub Pages访问
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname))); // 使用根目录作为静态文件目录
 

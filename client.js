@@ -1,5 +1,12 @@
-// API基础URL
-const API_BASE_URL = '/api';
+// API基础URL - 支持分离部署
+// 如果是在本地开发，使用相对路径，否则使用Render上的API地址
+const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+                    ? '/api' 
+                    : 'https://aug-sec-knowledge-base-server.onrender.com/api'; // 请替换为你的实际Render域名
+
+// 添加调试日志
+console.log('当前环境:', window.location.hostname);
+console.log('使用API基础URL:', API_BASE_URL);
 
 // DOM加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
@@ -49,10 +56,24 @@ document.addEventListener('DOMContentLoaded', function() {
     async function initializeApp() {
         try {
             showLoading(true);
-            const response = await fetch(`${API_BASE_URL}/init`);
-            if (!response.ok) throw new Error('Failed to initialize app');
+            const initUrl = `${API_BASE_URL}/init`;
+            console.log('正在请求初始化数据:', initUrl);
+            
+            const response = await fetch(initUrl, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            if (!response.ok) {
+                console.error('初始化请求失败:', response.status, response.statusText);
+                throw new Error(`Failed to initialize app: ${response.status} ${response.statusText}`);
+            }
             
             const data = await response.json();
+            console.log('获取到初始化数据:', data);
             
             // 显示热门话题
             displayTopics(data.popularTopics);
@@ -62,17 +83,56 @@ document.addEventListener('DOMContentLoaded', function() {
             
             showLoading(false);
         } catch (error) {
-            console.error('Initialization error:', error);
+            console.error('初始化错误详情:', error);
             showLoading(false);
-            showError('无法加载初始数据，请刷新页面重试');
+            showError(`无法加载初始数据，请刷新页面重试。错误: ${error.message}`);
+            
+            // 在出错时显示模拟数据
+            displayFallbackData();
         }
+    }
+    
+    // 如果API调用失败，显示模拟数据
+    function displayFallbackData() {
+        console.log('使用备用数据');
+        
+        // 模拟话题数据
+        const mockTopics = [
+            { name: "encryption", count: 145 },
+            { name: "SSL", count: 92 },
+            { name: "sql injection", count: 87 },
+            { name: "XSS", count: 73 },
+            { name: "authentication", count: 68 }
+        ];
+        
+        // 显示模拟话题
+        displayTopics(mockTopics);
+        
+        // 显示模拟知识项
+        const mockItem = {
+            id: 1,
+            query: "How can I safely store passwords in PHP?",
+            category: "How - to",
+            challenges: "Risk of storing passwords in plain text or using weak hashing algorithms like MD5, vulnerability to rainbow table attacks, handling password resets securely",
+            skillsRequired: "bcrypt with password_hash(), avoid MD5, proper salt generation, secure comparison methods",
+            llmSolution: "Use password_hash() to deal with password storage, set proper cost factor, leverage secure comparison with password_verify(), implement proper password policies",
+            similarity: "0.91 (Extremely similar)",
+            sentimental: "Easy to read, high level skilled required",
+            relatedPosts: [
+                { title: "Best practices for secure password storage in PHP", url: "https://stackoverflow.com/questions/401656/secure-hash-and-salt-for-php-passwords" },
+                { title: "Why MD5 is not suitable for password hashing", url: "https://stackoverflow.com/questions/2235158/php-md5-vs-sha1-vs-sha256-which-to-use-for-a-php-login" },
+                { title: "How to implement a secure password reset flow", url: "https://stackoverflow.com/questions/1089760/how-to-implement-password-reset-feature" }
+            ]
+        };
+        
+        displayKnowledgeItem(mockItem);
     }
     
     // 显示热门话题
     function displayTopics(topics) {
         // 保存"Popular topics:"文本，防止被清空
         const popularTopicsSpan = topicsContainer.querySelector('span');
-        const popularTopicsText = popularTopicsSpan.textContent;
+        const popularTopicsText = popularTopicsSpan ? popularTopicsSpan.textContent : 'Popular topics:';
         
         // 清除除第一个span以外的所有内容
         topicsContainer.innerHTML = '';
