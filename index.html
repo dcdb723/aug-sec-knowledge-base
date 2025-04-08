@@ -11,65 +11,71 @@
 <body>
     <div class="container">
         <header>
-            <div class="logo-container">
-                <object data="logo.svg" type="image/svg+xml" class="logo"></object>
-                <h1 class="title">AUGMENTED SECURITY<br>KNOWLEDGE BASE</h1>
+            <div class="logo">
+                <img src="logo.svg" alt="Security Knowledge Base Logo">
+                <h1>
+                    <span class="title-top">AUGMENTED SECURITY</span>
+                    <span class="title-bottom">KNOWLEDGE BASE</span>
+                </h1>
             </div>
-            
-            <div class="search-container">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="How can I safely store passwords in PHP?">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search for security topics...">
+            </div>
+            <div class="popular-topics">
+                <span class="topic-label">Popular Topics:</span>
+                <div class="topics-list">
+                    <!-- Topics will be dynamically loaded here -->
                 </div>
-            </div>
-            
-            <div class="topics">
-                <span>Popular topics:</span>
-                <!-- 话题将由服务端动态填充 -->
             </div>
         </header>
-        
+
         <main>
-            <div class="knowledge-card">
-                <div class="card-item">
-                    <span class="label">Category:</span>
-                    <span class="value">Loading...</span>
+            <div id="knowledgeCard" class="knowledge-card">
+                <div class="card-header">
+                    <button id="backButton" class="back-button">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2 id="knowledgeTitle"></h2>
                 </div>
-                
-                <div class="card-item">
-                    <span class="label">Challenges:</span>
-                    <span class="value">Loading...</span>
-                </div>
-                
-                <div class="card-item">
-                    <span class="label">Skills Required:</span>
-                    <span class="value">Loading...</span>
-                </div>
-                
-                <div class="card-item">
-                    <span class="label">LLM solution:</span>
-                    <span class="value">Loading...</span>
-                </div>
-                
-                <div class="card-item">
-                    <span class="label">Similarity:</span>
-                    <span class="value">Loading...</span>
-                </div>
-                
-                <div class="card-item">
-                    <span class="label">Sentimental:</span>
-                    <span class="value">Loading...</span>
-                </div>
-            </div>
-            
-            <div class="related-posts">
-                <h2>Related Post on Stack Overflow</h2>
-                <div class="posts-container">
-                    <!-- 相关文章将由服务端动态填充 -->
-                    <div class="more-button" title="Show more related posts">
-                        <i class="fas fa-ellipsis-h"></i>
+                <div class="card-content">
+                    <div class="security-info">
+                        <div class="info-item">
+                            <span class="label">Category:</span>
+                            <span class="value" id="category"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Similarity:</span>
+                            <span class="value" id="similarity"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Challenges:</span>
+                            <span class="value" id="challenges"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Skills Required:</span>
+                            <span class="value" id="skills"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">LLM Solution:</span>
+                            <span class="value" id="llmSolution"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Sentimental:</span>
+                            <span class="value" id="sentimental"></span>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <h3>Content</h3>
+                        <p id="knowledgeContent"></p>
+                    </div>
+                    <div class="card-footer">
+                        <div id="knowledgeDate" class="date"></div>
                     </div>
                 </div>
+            </div>
+
+            <div id="relatedPosts" class="related-posts">
+                <!-- Related posts will be dynamically inserted here -->
             </div>
         </main>
         

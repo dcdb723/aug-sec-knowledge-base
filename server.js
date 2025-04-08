@@ -66,12 +66,9 @@ const knowledgeBase = [
 
 // 热门话题
 const popularTopics = [
-    { name: "encryption", count: 145 },
-    { name: "SSL", count: 92 },
-    { name: "sql injection", count: 87 },
-    { name: "XSS", count: 73 },
-    { name: "authentication", count: 68 },
-    { name: "CSRF", count: 52 }
+    { name: "PHP", count: 145 },
+    { name: "Java", count: 92 },
+    { name: "Script", count: 87 }
 ];
 
 // API路由
@@ -111,19 +108,23 @@ app.get('/api/topics/:topicName', (req, res) => {
 
 // 搜索知识库
 app.get('/api/search', (req, res) => {
-    const query = req.query.q?.toLowerCase() || '';
+    const searchQuery = req.query.q?.toLowerCase() || '';
     
-    if (!query) {
+    if (!searchQuery) {
         return res.status(400).json({ error: 'Search query is required' });
     }
     
-    // 简单的模糊搜索 (真实应用中应使用更高级的搜索算法或全文搜索引擎如Elasticsearch)
-    const results = knowledgeBase.filter(item => 
-        item.query.toLowerCase().includes(query) || 
-        item.category.toLowerCase().includes(query) ||
-        item.challenges.toLowerCase().includes(query) ||
-        item.skillsRequired.toLowerCase().includes(query)
-    );
+    // 将搜索词分割成单词数组
+    const searchWords = searchQuery.split(/\s+/).filter(word => word.length > 0);
+    
+    // 在query字段中搜索匹配的文章
+    const results = knowledgeBase.filter(item => {
+        const itemWords = item.query.toLowerCase().split(/\s+/);
+        // 检查搜索词是否在query中出现
+        return searchWords.some(searchWord => 
+            itemWords.some(itemWord => itemWord.includes(searchWord))
+        );
+    });
     
     res.json(results);
 });

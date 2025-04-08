@@ -1,3 +1,4 @@
+/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +13,7 @@ body {
 }
 
 .container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 30px;
     background-color: #ffffff;
@@ -26,27 +27,32 @@ header {
     margin-bottom: 40px;
 }
 
-.logo-container {
+.logo {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
-.logo {
-    width: 140px;
-    height: 140px;
-    margin-bottom: 15px;
+.logo img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
     filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
 }
 
-.title {
-    font-size: 30px;
+.logo h1 {
+    font-size: 32px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 3px;
-    margin-top: 10px;
-    font-family: 'Impact', sans-serif;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.title-top, .title-bottom {
+    display: block;
+    line-height: 1.2;
     background: linear-gradient(45deg, #2c3e50, #4ca1af);
     -webkit-background-clip: text;
     background-clip: text;
@@ -54,15 +60,16 @@ header {
     text-shadow: none;
 }
 
-.search-container {
-    margin-bottom: 30px;
+.title-bottom {
+    margin-top: 5px;
+    font-size: 0.9em;
 }
 
+/* Search box styles */
 .search-box {
-    display: flex;
-    align-items: center;
+    position: relative;
     width: 85%;
-    margin: 0 auto;
+    margin: 0 auto 15px;
     background-color: #fff;
     border-radius: 50px;
     padding: 15px 25px;
@@ -76,190 +83,204 @@ header {
     border-color: #4ca1af;
 }
 
-.search-box i {
-    color: #777;
-    margin-right: 15px;
-    font-size: 18px;
-}
-
 .search-box input {
-    flex: 1;
+    width: 100%;
     border: none;
     outline: none;
     font-size: 17px;
     padding: 8px 0;
 }
 
-/* 设置placeholder样式 */
 .search-box input::placeholder {
     color: #999;
     font-style: italic;
-    opacity: 1; /* Firefox需要这个 */
+    opacity: 1;
 }
 
-/* 支持各浏览器的placeholder样式 */
-.search-box input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: #999;
-    font-style: italic;
-}
-.search-box input::-moz-placeholder { /* Firefox 19+ */
-    color: #999;
-    font-style: italic;
-}
-.search-box input:-ms-input-placeholder { /* IE 10+ */
-    color: #999;
-    font-style: italic;
-}
-.search-box input:-moz-placeholder { /* Firefox 18- */
-    color: #999;
-    font-style: italic;
+/* Related posts styles */
+.related-posts {
+    display: none;
+    margin-bottom: 2rem;
 }
 
-.topics {
-    margin-top: 20px;
+.related-post {
+    background: white;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.related-post:hover {
+    transform: translateY(-2px);
+}
+
+.related-post h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.related-post p {
     color: #666;
-    font-size: 15px;
+    margin-bottom: 1rem;
 }
 
-.topic {
-    color: #e74c3c;
-    text-decoration: none;
-    font-weight: 500;
-    margin: 0 5px;
-    transition: color 0.2s;
-    position: relative;
-}
-
-.topic:hover {
-    color: #c0392b;
-}
-
-.topic::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background-color: #c0392b;
-    transition: width 0.3s;
-}
-
-.topic:hover::after {
-    width: 100%;
-}
-
-/* Knowledge Card Styles */
-.knowledge-card {
-    background-color: #fffdf9;
-    border-radius: 16px;
-    padding: 30px;
-    margin-bottom: 40px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
-    border: 1px solid #f5f5f5;
-}
-
-.card-item {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
+.post-meta {
     display: flex;
+    justify-content: space-between;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Knowledge card styles */
+.knowledge-card {
+    display: none;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.back-button {
+    background: #f8f9fa;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2c3e50;
+    transition: background-color 0.2s ease;
+    width: 40px;
+    height: 40px;
+}
+
+.back-button:hover {
+    background: #e9ecef;
+}
+
+.back-button i {
+    font-size: 1rem;
+}
+
+.knowledge-card h2 {
+    color: #2c3e50;
+    margin-left: 1rem;
+    flex: 1;
+}
+
+.security-info {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-item .label {
+    font-weight: 600;
+    color: #2c3e50;
+    width: 150px;
+}
+
+.info-item .value {
+    color: #444;
+    flex: 1;
+}
+
+.post-content {
+    margin-bottom: 1.5rem;
+}
+
+.post-content h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.post-content p {
+    color: #444;
+    line-height: 1.8;
+}
+
+/* Card footer styles */
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.date {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Popular Topics styles */
+.popular-topics {
+    width: 85%;
+    margin: 0 auto 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.topic-label {
+    color: #666;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.topics-list {
+    display: flex;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
-.card-item:not(:last-child) {
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.label {
-    font-weight: 600;
-    color: #555;
-    width: 170px;
-    padding-right: 15px;
-    font-size: 16px;
-}
-
-.value {
-    flex: 1;
-    color: #333;
-    line-height: 1.5;
-    font-size: 16px;
-}
-
-/* Related Posts Styles */
-.related-posts {
-    margin-top: 40px;
-}
-
-.related-posts h2 {
-    font-size: 22px;
-    color: #333;
-    margin-bottom: 25px;
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.related-posts h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(to right, #e74c3c, #ff9f43);
-    border-radius: 3px;
-}
-
-.posts-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.post {
-    flex: 1;
-    background-color: #fff;
-    height: 160px;
-    border-radius: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    text-align: center;
-    font-weight: 500;
-    color: #444;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+.topic {
+    background: #f0f2f5;
+    color: #2c3e50;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
 }
 
-.post:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    color: #e74c3c;
+.topic:hover {
+    background: #e2e5e9;
+    transform: translateY(-1px);
+    border-color: #d1d5db;
 }
 
-.more-button {
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(45deg, #ff9f43, #ff7e5f);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    align-self: center;
-    box-shadow: 0 5px 15px rgba(255, 159, 67, 0.3);
-    transition: all 0.3s ease;
-}
-
-.more-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(255, 159, 67, 0.4);
-}
-
+/* Responsive styles */
 @media (max-width: 768px) {
     .container {
         padding: 20px;
@@ -270,91 +291,23 @@ header {
         padding: 12px 20px;
     }
     
-    .posts-container {
-        flex-wrap: wrap;
+    .logo img {
+        width: 160px;
+        height: 160px;
     }
     
-    .post {
-        flex: 0 0 calc(50% - 10px);
-        margin-bottom: 20px;
-        height: 140px;
+    .logo h1 {
+        font-size: 28px;
     }
-    
-    .card-item {
+
+    .popular-topics {
+        width: 100%;
         flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
-    
-    .label {
+
+    .topics-list {
         width: 100%;
-        margin-bottom: 8px;
-    }
-    
-    .value {
-        width: 100%;
-    }
-    
-    .title {
-        font-size: 24px;
-    }
-}
-
-@media (max-width: 480px) {
-    .post {
-        flex: 0 0 100%;
-    }
-    
-    .more-button {
-        margin-top: 10px;
-    }
-}
-
-/* Footer Styles */
-footer {
-    margin-top: 40px;
-    text-align: center;
-    color: #777;
-    font-size: 14px;
-    padding-top: 20px;
-    border-top: 1px solid #eaeaea;
-}
-
-/* 默认搜索文本样式 - 使用更高优先级 */
-input[type="text"].default-search-text,
-.search-box input.default-search-text {
-    color: #999 !important;
-    font-style: italic !important;
-}
-
-/* 加载状态样式 */
-.loading .knowledge-card,
-.loading .related-posts {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-/* 添加加载旋转指示器 */
-.loading::after {
-    content: '';
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    border-top-color: #e74c3c;
-    animation: spin 1s ease-in-out infinite;
-    z-index: 1000;
-    display: none;
-}
-
-.loading.show-spinner::after {
-    display: block;
-}
-
-@keyframes spin {
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
     }
 } 
